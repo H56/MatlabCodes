@@ -1,0 +1,7 @@
+function V = LDE(X, labels, k1, t1, k2, t2, d)
+[W1, W2] = LDECompute(X, labels, k1, t1, k2, t2);
+D1 = spdiags(sum(W1, 2),0,speye(size(W1,1)));
+D2 = spdiags(sum(W2, 2),0,speye(size(W2,1)));
+
+
+[V, D] = eigs( (X * (D1 - W1) * X')^(-1) * (X * (D2 - W2) * X' ), d);
